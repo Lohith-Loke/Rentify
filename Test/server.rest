@@ -1,0 +1,22 @@
+@url = http://localhost:3000
+
+GET {{url}}  HTTP/1.1
+
+
+####
+POST {{url}}/auth/
+Content-Type: application/json
+
+{
+    "email":"tes1t@email.com",
+    "password":"123456789"
+}
+
+
+#####
+POST {{url}}/auth/
+Content-Type: application/json
+
+{
+    "password":"12s345678"
+}
