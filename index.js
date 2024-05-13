@@ -3,8 +3,9 @@ import { configDotenv } from "dotenv";
 import mongoose from "mongoose";
 import Credentials from "./Models/credentials.js";
 import bcrypt from "bcrypt";
-import apiRouter from  "./Routes/index.js";
-
+import apiRouter from "./Routes/index.js";
+import cookieParser from "cookie-parser";
+import session from "express-session";
 configDotenv();
 
 mongoose.connect(process.env.MONGODBURI).catch(() => {
@@ -13,11 +14,25 @@ mongoose.connect(process.env.MONGODBURI).catch(() => {
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded());
+const logRequests = (req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+  next(); // Call next to proceed to the next middleware or route handler
+};
+
+// Attach the middleware to your Express app
+app.use(logRequests);
+
+
+app.use(
+  session({
+    secret: process.env.SessionSecret,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 app.use("/", apiRouter);
-
-
-
 
 app.get("/", (req, res) => {
   console.log(req.body);
