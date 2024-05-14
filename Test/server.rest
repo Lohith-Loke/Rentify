@@ -4,11 +4,11 @@ GET {{url}}  HTTP/1.1
 
 
 ####
-POST {{url}}/auth/
+POST {{url}}/auth/login
 Content-Type: application/json
 
 {
-    "email":"tes1t@email.com",
+    "usermail":"tes4t@email.com",
     "password":"123456789"
 }
 
@@ -20,3 +20,9 @@ Content-Type: application/json
 {
     "password":"12s345678"
 }
+####
+GET {{url}}/dashboard/upload/ 
+Content-Type: multipart/form-data
+Cookie: connect.sid=s%3ADjCJFJKb3QOcOXWjZtq7MUVNGSYC7FsW.DyMfSHJqthL2R7lNvLg0GvzX7yL4od53X5PNgBP9jcs
+
+<@ ./package-lock.json
