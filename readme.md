@@ -1,0 +1,8 @@
+THIS A IS NODE APPLICATION THAT REQUIRES MONGDB TO RUN
+
+The PROJECT IS NOT FULLY COMPLETED BUT DO LOOk INTO CODE
+
+RUN THE PLLICATION FORM index.js folder
+
+process.cwd()/partials/*.html to serve the html files.
+

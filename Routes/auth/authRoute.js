@@ -1,52 +1,51 @@
 import { Router } from "express";
 import bcrypt from "bcrypt";
 import path from "path";
-import fs from "fs";
 import mongoose from "mongoose";
 import Credentials from "../../Models/credentials.js";
 import isValidEmail from "../../Models/validators/Emailvaliditor.js";
 import isValidPassword from "../../Models/validators/Passwordvaidator.js";
-import Folderstore from "../../Models/folderstore.js";
-
+import Users from "../../Models/User.js";
 
 const auth = Router();
 
 auth.post("/signup", async (req, res) => {
-  const { usermail, password } = req.body;
+  const { usermail, password,firstname,lastname,phonenumber } = req.body;
 
-  if (!usermail || !password) {
-    return res.status(400).json({ message: "Missing usermail or password" });
+  if (!usermail || !password || !firstname || !lastname || !phonenumber) {
+    console.log(usermail, password,firstname,lastname,phonenumber);
+    console.log(req.body);
+    return res.status(400).json({ message: "Missing details or password" });
   }
 
   if (!isValidEmail(usermail) || !isValidPassword(password)) {
-    return res.status(400).json({ message: "Invalid usermail or password format" });
+    return res
+      .status(400)
+      .json({ message: "Invalid usermail or password format" });
   }
-
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
-    const session = await mongoose.startSession();
-    session.startTransaction();
-
-    const passwordHash = await bcrypt.hash(password, Number(process.env.saltRounds));
+    const passwordHash = await bcrypt.hash(
+      password,
+      Number(process.env.saltRounds)
+    );
     const cred = await Credentials.create({
       usermail: usermail,
       passwordhash: passwordHash,
     });
-
-    const userFolder = await Folderstore.create({ foldername: cred.id });
-    const folderPath = path.join(process.cwd(), "FILESTORE", cred.id);
-
-    fs.mkdir(folderPath, (err) => {
-      if (err) {
-        console.error("Error creating user folder:", err);
-        throw new Error("Failed to create user folder");
-      }
-    });
+    const user=Users.create({firstname:firstname,lastname:lastname,phonenumber:phonenumber,cred:cred})
+    console.log(cred.id);
+    console.log(user.id);
 
     await session.commitTransaction();
     session.endSession();
 
-    return res.status(201).json({ message: "User creation successful" });
+    return res.redirect("/auth")
+    // return res.status(201).json({ message: "User creation successful" });
   } catch (error) {
+    session.abortTransaction();
+    session.endSession();
     console.error("Error during signup:", error);
 
     if (error instanceof mongoose.Error.ValidationError) {
@@ -61,7 +60,6 @@ auth.post("/signup", async (req, res) => {
     }
   }
 });
-
 
 auth.post("/login", async (req, res) => {
   const { usermail, password } = req.body;
@@ -81,6 +79,7 @@ auth.post("/login", async (req, res) => {
       const isvalid = await bcrypt.compare(password, usercred.passwordhash);
       if (isvalid) {
         req.session.user = { usermail: usercred.usermail, uid: usercred.id };
+        return res.redirect("/dashboard")
         return res.status(200).send({ message: "password match" });
       } else {
         console.log("failed login->", usercred.usermail);
@@ -105,7 +104,12 @@ auth.post("/login", async (req, res) => {
 });
 
 auth.get("/", (req, res) => {
-  res.send("auth  page working ");
+
+  res.sendFile(path.join(process.cwd(), "partals", "login.html"));
+});
+auth.get("/signup", (req, res) => {
+
+  res.sendFile(path.join(process.cwd(), "partals", "signup.html"));
 });
 
 export default auth;
