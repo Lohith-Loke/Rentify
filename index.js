@@ -3,7 +3,7 @@ import { configDotenv } from "dotenv";
 import mongoose from "mongoose";
 import apiRouter from "./Routes/index.js";
 import session from "express-session";
-import fileUpload from "express-fileupload";
+
 configDotenv();
 
 mongoose.connect(process.env.MONGODBURI).catch(() => {
@@ -28,6 +28,7 @@ app.use(logRequests)
 
 app.use(
   session({
+
     resave: false,
     saveUninitialized: false,
   })
