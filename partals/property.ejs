@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gender Selection</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+      }
+      form {
+        margin-top: 20px;
+        text-align: center;
+      }
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: #fff;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background-color: #45a049;
+      }
+      .card {
+        width: 300px;
+        min-width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+      .property-info {
+        margin-bottom: 10px;
+      }
+      .property-info label {
+        font-weight: bold;
+      }
+      .notes {
+        margin-top: 20px;
+      }
+      .property-image {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .property-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+      }
+      .disp {
+        display: flex;
+        flex-wrap: wrap;
+
+        justify-content: space-around;
+      }
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+      }
+      nav {
+        display: inline-block;
+      }
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        padding: 0 10px;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      .search-container {
+        text-align: center;
+        margin-top: 50px;
+      }
+      .search-box {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 300px;
+        max-width: 100%;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      .search-button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .search-button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div style="display: flex; justify-content: space-evenly">
+        <div onclick="window.location.href='#'">
+          <p>Home</p>
+        </div>
+        <a  href="/dashboard" style="text-decoration: none;color: inherit;"> 
+          <div>
+              <p>DASHBORD</p>
+          </div>
+        </a>
+  
+        <a  href="/auth/logout" style="text-decoration: none;color: inherit;"> 
+        <div>
+            <p>Logout</p>
+        </div>
+      </a>
+      </div>
+    </header>
+    <div class="container">
+      <h1>welcome TO RENTIFY</h1>
+      <p>connecting Tenent and Owners</p>
+    </div>
+    <div style="display: flex; justify-content: center">
+      <h3>
+        want to enlist your property ?
+        <a href="dashboard/create">click here</a>
+      </h3>
+    </div>
+    <div class="search-container">
+      <form action="dashboard" method="GET">
+        <input
+          type="text"
+          class="search-box"
+          name="query"
+          placeholder="Search..."
+        />
+        <button type="submit" class="search-button">Search</button>
+      </form>
+    </div>
+    <div class="disp">
+      <div class="card">
+        <div class="property-image">
+          <img src="https://via.placeholder.com/300x200" alt="Property Image" />
+          <!-- <img src="<%=  %>" alt="Property Image" /> -->
+        </div>
+        <div class="property-info">
+          <label>Address Line 1:</label>
+          <span><%= property.addressl1 %></span>
+        </div>
+        <div class="property-info">
+          <label>City:</label>
+          <span><%= property.city %></span>
+        </div>
+        <div class="property-info">
+          <label>State:</label>
+          <span><%= property.state %></span>
+        </div>
+        <div class="property-info">
+          <label>Rate:</label>
+          <span><%= property.rate %></span>
+        </div>
+        <div class="property-info">
+          <label>Is Apartment:</label>
+          <span><%= property.isappartment %></span>
+        </div>
+        <div class="property-info">
+          <label>Property Type:</label>
+          <span><%= property.propertytype %></span>
+        </div>
+        <div class="property-info">
+          <label>Distance to School:</label>
+          <span><%= property.disttoschool %></span>
+        </div>
+        <div class="property-info">
+          <label>Distance to College:</label>
+          <span><%= property.disttocollege %></span>
+        </div>
+        <div class="property-info">
+          <label>Distance to Metro:</label>
+          <span><%= property.disttometro %></span>
+        </div>
+        <div class="notes">
+          <label>Notes:</label>
+          <p><%= property.notes %></p>
+        </div>
+      </div>
+      <!-- ownerCard.ejs -->
+
+      <div class="card">
+        <div class="owner-info">
+          <label>First Name:</label>
+          <span><%= owner.firstname %></span>
+        </div>
+        <div class="owner-info">
+          <label>Last Name:</label>
+          <span><%= owner.lastname %></span>
+        </div>
+        <div class="owner-info">
+          <label>Phone Number:</label>
+          <span><%= owner.phonenumber %></span>
+        </div>
+        <div class="owner-info">
+          <label>Is Active:</label>
+          <span><%= owner.isactive ? 'Yes' : 'No' %></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Address Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      header {
+        height: 60px;
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+      }
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+      }
+      form {
+        margin-top: 20px;
+      }
+      .input-group {
+        margin-bottom: 20px;
+      }
+      .input-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .input-group input[type="text"],
+      .input-group input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .input-group select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: #fff;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div style="display: flex; justify-content: space-evenly">
+        <div onclick="window.location.href='#'">
+          <p>Home</p>
+        </div>
+        <a  href="/dashboard" style="text-decoration: none;color: inherit;"> 
+          <div>
+              <p>DASHBORD</p>
+          </div>
+        </a>
+        <a  href="/auth/logout" style="text-decoration: none;color: inherit;"> 
+        <div>
+            <p>Logout</p>
+        </div>
+      </a>
+
+      </div>
+    </header>
+    <div class="container">
+      <h2>Address Form</h2>
+      <p>write NA if not applicaple * is required fields</p>
+      <div></div>
+      <p>remember more Information attarcts more eyes</p>
+      <form action="/dashboard/create" method="POST">
+        <div class="input-group">
+          <label for="addressl1">Address Line 1*:</label>
+          <input type="text" id="addressl1" name="addressl1" value="<%= formdata.addressl1 %>" required />
+        </div>
+          <input type="hidden" id="id" name="id" value="<%= formdata._id %>"  />
+        <div class="input-group">
+          <label for="city">City*:</label>
+          <input type="text" id="city" name="city" value="<%= formdata.city %>" required />
+        </div>
+        <div class="input-group">
+          <label for="state">State*:</label>
+          <input type="text" id="state" name="state" value="<%= formdata.state %>" required />
+        </div>
+        <div class="input-group">
+          <label for="rate">rates *</label>
+          <select name="rate" id="rate">
+            <option value="5k-10k"  <% if(formdata.rate === '5k-10k') { %> selected <% }  %>>5k-10k</option>
+            <option value="10k-20k" <% if(formdata.rate === '10k-20k') { %> selected <% } %>>10k-20k</option>
+            <option value="10k-20k" <% if(formdata.rate === '10k-20k') { %> selected <% } %>>10k-20k</option>
+            <option value="35k-40k" <% if(formdata.rate === '35k-40k') { %> selected <% } %>>35k-40k</option>
+            <option value="40k-45k" <% if(formdata.rate === '40k-45k') { %> selected <% } %>>40k-45k</option>
+            <option value="45k-50k" <% if(formdata.rate === '45k-50k') { %> selected <% } %>>45k-50k</option>
+            <option value="50k-55k" <% if(formdata.rate === '50k-55k') { %> selected <% } %>>50k-55k</option>
+            <option value="55k-60k" <% if(formdata.rate === '55k-60k') { %> selected <% } %>>55k-60k</option>
+            <option value="60k-70k" <% if(formdata.rate === '60k-70k') { %> selected <% } %>>60k-70k</option>
+            <option value="70k-80k" <% if(formdata.rate === '70k-80k') { %> selected <% } %>>70k-80k</option>
+            <option value="80k-90k" <% if(formdata.rate === '80k-90k') { %> selected <% } %>>80k-90k</option>
+            <option value="1l-1.5l" <% if(formdata.rate === '1l-1.5l') { %> selected <% } %>>1l-1.5l</option>
+            <option value="1.5l+" <% if(formdata.rate === '1.5l+') { %> selected <% } %>>1.5l+</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="isappartment">Is Apartment Complex*:</label>
+          <select name="isappartment" id="isappartment">
+            <option value="no" <% if(formdata.isappartment === 'no') { %> selected <% } %>>No</option>
+            <option value="yes" <% if(formdata.isappartment === 'yes') { %> selected <% } %>>Yes</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="propertytype">Type of property *</label>
+          <select name="propertytype" id="propertytype">
+            <option value="1bhk" <% if(formdata.propertytype === '1bhk') { %> selected <% } %>>1bhk</option>
+            <option value="2bhk" <% if(formdata.propertytype === '2bhk') { %> selected <% } %>>2bhk</option>
+            <option value="3bhk" <% if(formdata.propertytype === '3bhk') { %> selected <% } %>>3bhk</option>
+            <option value="Condo" <% if(formdata.propertytype === 'Condo') { %> selected <% } %>>condo</option>     
+          </select>
+        </div>
+
+        <h3>Additional Information</h3>
+        <div class="input-group">
+          <label for="disttoschool">Distance to School:</label>
+          <input type="text" id="disttoschool" name="disttoschool" value="<%= formdata.disttoschool %>" />
+        </div>
+        <div class="input-group">
+          <label for="disttocollege">Distance to College:</label>
+          <input type="text" id="disttocollege" name="disttocollege" value="<%= formdata.disttocollege %>" />
+        </div>
+        <div class="input-group">
+          <label for="disttometro">Distance to Metro:</label>
+          <input type="text" id="disttometro" name="disttometro" value="<%= formdata.disttometro %>" />
+        </div>
+        <div class="input-group">
+          <label for="notes">Note for Tenants:</label>
+          <input type="text" id="notes" name="notes" value="<%= formdata.notes %>" />
+        </div>
+        <button type="submit" class="btn"><%= formdata._id? "Edit":"submit" %></button>
+      </form>
+    </div>
+  </body>
+</html>

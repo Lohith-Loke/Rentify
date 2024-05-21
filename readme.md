@@ -1,8 +1,8 @@
 THIS A IS NODE APPLICATION THAT REQUIRES MONGDB TO RUN
 
-The PROJECT IS NOT FULLY COMPLETED BUT DO LOOk INTO CODE
+The Entry point of application is through Index ,js in root directory.
 
-RUN THE PLLICATION FORM index.js folder
+the APP uses Mongodb as database, sessions are managed in memory 
 
-process.cwd()/partials/*.html to serve the html files.
+>run the application form index.js dir (code uses process.cwd() for file loaction)
 
