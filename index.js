@@ -28,7 +28,7 @@ app.use(logRequests)
 
 app.use(
   session({
-
+ secret: process.env.SessionSecret,
     resave: false,
     saveUninitialized: false,
   })
