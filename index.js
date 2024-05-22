@@ -3,9 +3,7 @@ import { configDotenv } from "dotenv";
 import mongoose from "mongoose";
 import apiRouter from "./Routes/index.js";
 import session from "express-session";
-
 configDotenv();
-
 mongoose.connect(process.env.MONGODBURI).catch(() => {
   console.log("DB connection failed");
 });
@@ -28,7 +26,7 @@ app.use(logRequests)
 
 app.use(
   session({
- secret: process.env.SessionSecret,
+    secret: process.env.SessionSecret,
     resave: false,
     saveUninitialized: false,
   })

@@ -123,7 +123,6 @@ auth.get("/", (req, res) => {
       err = {};
     }
   }
-  console.log(err.message);
   res.render("login", { err });
 });
 
