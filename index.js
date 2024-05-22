@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import apiRouter from "./Routes/index.js";
 import session from "express-session";
 configDotenv();
-mongoose.connect(process.env.MONGODBURI).catch(() => {
+mongoose.connect(process.env.MONGODBURI, {dbName : process.env.dbName}).catch(() => {
   console.log("DB connection failed");
 });
 
